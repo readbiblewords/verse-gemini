@@ -5,86 +5,123 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>每日灵粮</title>
     <style>
+        /* 全局背景和居中 */
         body { 
             font-family: 'Helvetica Neue', Arial, sans-serif; 
-            text-align: center; 
+            text-align: center; /* 所有行内元素居中 */
             padding: 20px;
             max-width: 600px;
             margin: 0 auto;
+            background-color: #f0f4f8; /* 轻微背景色以衬托毛玻璃效果 */
         }
-        /* 动态标题样式 */
+        
+        /* 容器居中 */
+        #verse-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* 块级元素居中 */
+        }
+
+        /* 动态标题样式 - 居中 */
         #verse-title { 
             font-size: 1.8em; 
             margin-top: 20px; 
             font-weight: bold;
             color: #333;
+            text-align: center;
         }
-        /* 经文内容样式 */
+
+        /* 经文内容样式 - 居中 */
         #verse-text { 
             font-size: 1.2em; 
             margin: 25px 0; 
             line-height: 1.8; 
             font-style: italic;
             color: #555;
-            padding: 10px;
-            border-left: 3px solid #007BFF;
-            text-align: left;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center; /* 文本居中 */
+            max-width: 90%; /* 控制宽度 */
+            background: rgba(255, 255, 255, 0.7); /* 轻微透明背景 */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
-        /* 经文出处样式 */
+
+        /* 经文出处样式 - 居中 */
         #verse-ref { 
             font-size: 1em; 
             margin-bottom: 40px; 
             color: #888;
+            text-align: center;
         }
+
         /* 按钮容器 */
         #actions {
             display: flex;
             justify-content: center;
             gap: 20px;
         }
-        /* 按钮样式 */
+        
+        /* -------------------- 毛玻璃按钮效果 -------------------- */
         .action-button {
-            padding: 10px 20px;
+            padding: 12px 24px;
             font-size: 1em;
+            font-weight: 600;
             cursor: pointer;
-            border: none;
-            border-radius: 5px;
-            transition: background-color 0.3s;
+            border: 1px solid rgba(255, 255, 255, 0.3); /* 边框 */
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            
+            /* 核心毛玻璃效果 */
+            background: rgba(255, 255, 255, 0.2); /* 轻微透明背景 */
+            backdrop-filter: blur(10px); /* 模糊背景 */
+            -webkit-backdrop-filter: blur(10px); /* 兼容性 */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* 阴影 */
+            color: #1a1a1a; /* 默认文字颜色 */
         }
+        
+        /* 按钮悬停/激活效果 */
+        .action-button:hover {
+            background: rgba(255, 255, 255, 0.35);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+            transform: translateY(-2px);
+        }
+        
+        /* 分享按钮特定颜色（可选）*/
         #share-button {
-            background-color: #007BFF;
-            color: white;
+            color: #007BFF;
+            text-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
         }
-        #share-button:hover {
-            background-color: #0056b3;
-        }
+        /* 祷告按钮特定颜色（可选）*/
         #prayer-button {
-            background-color: #28A745;
-            color: white;
+            color: #28A745;
+            text-shadow: 0 0 5px rgba(40, 167, 69, 0.3);
         }
-        #prayer-button:hover {
-            background-color: #1e7e34;
-        }
-        /* 弹出层（用于祷告指引） */
+        /* ---------------------------------------------------- */
+
+
+        /* 弹出层（Modal）样式 */
         .modal {
             display: none; 
             position: fixed; 
-            z-index: 1; 
+            z-index: 10; /* 确保在最上层 */
             left: 0;
             top: 0;
             width: 100%; 
             height: 100%; 
             overflow: auto; 
-            background-color: rgba(0,0,0,0.4); 
+            background-color: rgba(0,0,0,0.6); 
         }
         .modal-content {
-            background-color: #fefefe;
-            margin: 15% auto;
-            padding: 20px;
-            border: 1px solid #888;
+            background: rgba(255, 255, 255, 0.9); /* 稍透明 */
+            backdrop-filter: blur(8px);
+            margin: 10% auto;
+            padding: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.5);
             width: 80%;
-            max-width: 400px;
-            border-radius: 8px;
+            max-width: 450px;
+            border-radius: 15px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+            text-align: left;
         }
         .close-button {
             color: #aaa;
@@ -98,22 +135,37 @@
             text-decoration: none;
             cursor: pointer;
         }
+        #modal-header {
+            font-weight: bold;
+            font-size: 1.2em;
+            margin-bottom: 15px;
+        }
     </style>
 </head>
 <body>
-    <div id="verse-title">正在加载...</div>
-    <div id="verse-text">正在加载经文...</div>
-    <div id="verse-ref"></div>
+    <div id="verse-container">
+        <div id="verse-title">正在加载...</div>
+        <div id="verse-text">正在加载经文...</div>
+        <div id="verse-ref"></div>
+    </div>
     
     <div id="actions">
-        <button id="share-button" class="action-button">分享</button>
+        <button id="share-button" class="action-button">分享 (Think)</button>
         <button id="prayer-button" class="action-button">祷告</button>
+    </div>
+
+    <div id="thinkModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" id="closeThink">&times;</span>
+            <div id="modal-header">今日思考与分享 (Think)</div>
+            <p id="think-content">正在加载思考内容...</p>
+        </div>
     </div>
 
     <div id="prayerModal" class="modal">
         <div class="modal-content">
-            <span class="close-button">&times;</span>
-            <h3>为今天的经文祷告</h3>
+            <span class="close-button" id="closePrayer">&times;</span>
+            <div id="modal-header">祷告指引 (Prayer)</div>
             <p>主啊，感谢您赐下今日的灵粮。求您帮助我将这句经文深藏于心，并用它来指引我今天的言行。奉主耶稣的名，阿门。</p>
         </div>
     </div>
@@ -123,100 +175,4 @@
         const EPOCH_DATE = new Date(Date.UTC(2024, 0, 1)); // 2024年1月1日
         const MS_PER_DAY = 1000 * 60 * 60 * 24;
 
-        // 经文数组：每个对象包含 Title, Text, Ref
-        const VERSES = [
-            {
-                title: "创造与开始",
-                text: "起初，神创造天地。",
-                ref: "创世记 1:1"
-            },
-            {
-                title: "永生之爱",
-                text: "神爱世人，甚至将他的独生子赐给他们，叫一切信他的，不至灭亡，反得永生。",
-                ref: "约翰福音 3:16"
-            },
-            {
-                title: "祂是牧者",
-                text: "耶和华是我的牧者，我必不至缺乏。",
-                ref: "诗篇 23:1"
-            },
-            {
-                title: "凡事都能",
-                text: "我靠着那加给我力量的，凡事都能做。",
-                ref: "腓立比书 4:13"
-            },
-            // TODO: 请在这里继续添加您所有的经文数据
-            // 格式：{ title: "你的标题", text: "你的经文内容。", ref: "经文出处" },
-        ];
-
-        function getDailyVerse() {
-            const today = new Date();
-            // 设置今天的 UTC 时间为午夜，以确保每日计算的准确性
-            const today_utc = Date.UTC(today.getFullYear(), today.getMonth(), today.getDate());
-
-            // 计算从纪元日到今天的总天数
-            const days_diff = Math.floor((today_utc - EPOCH_DATE) / MS_PER_DAY);
-
-            // 通过取模运算确保索引在经文总数范围内，实现循环
-            const verse_index = days_diff % VERSES.length;
-            const verse = VERSES[verse_index];
-
-            // 显示经文信息
-            document.getElementById('verse-title').innerText = verse.title;
-            document.getElementById('verse-text').innerText = verse.text;
-            document.getElementById('verse-ref').innerText = "— " + verse.ref;
-        }
-
-        // --- 交互功能 ---
-        const shareButton = document.getElementById('share-button');
-        const prayerButton = document.getElementById('prayer-button');
-        const modal = document.getElementById('prayerModal');
-        const closeButton = document.getElementsByClassName("close-button")[0];
-
-        // 分享功能
-        shareButton.onclick = function() {
-            const title = document.getElementById('verse-title').innerText;
-            const text = document.getElementById('verse-text').innerText;
-            const ref = document.getElementById('verse-ref').innerText;
-            const shareText = `【${title}】\n${text}\n${ref}`;
-            
-            // 尝试使用 Web Share API (现代手机浏览器支持)
-            if (navigator.share) {
-                navigator.share({
-                    title: '每日圣经经文',
-                    text: shareText,
-                    url: window.location.href // 分享当前链接
-                }).catch((error) => console.log('分享失败', error));
-            } else {
-                // 如果不支持 Web Share API，则复制到剪贴板
-                navigator.clipboard.writeText(shareText).then(() => {
-                    alert('经文已复制到剪贴板，您可以粘贴分享了！');
-                }).catch(err => {
-                    console.error('复制失败', err);
-                    alert('复制失败，请手动复制经文。');
-                });
-            }
-        }
-
-        // 祷告功能（显示弹出框）
-        prayerButton.onclick = function() {
-            modal.style.display = "block";
-        }
-
-        // 关闭弹出框
-        closeButton.onclick = function() {
-            modal.style.display = "none";
-        }
-
-        // 点击窗口外部关闭弹出框
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
-        }
-
-        // 立即运行
-        getDailyVerse();
-    </script>
-</body>
-</html>
+        // 经文数组：现在
