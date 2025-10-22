@@ -32,6 +32,14 @@
             text-align: center;
         }
 
+        /* 新增：日期显示样式 */
+        #date-display {
+            font-size: 0.9em; /* 小字 */
+            color: #777;
+            margin-bottom: 25px; /* 在日期和经文之间留出空间 */
+            font-weight: 500;
+        }
+
         /* 经文内容样式 - 居中 (已移除方框效果) */
         #verse-text { 
             font-size: 1.2em; 
@@ -151,6 +159,7 @@
 <body>
     <div id="verse-container">
         <div id="verse-title">正在加载...</div>
+        <div id="date-display"></div>
         <div id="verse-text">正在加载经文...</div>
         <div id="verse-ref"></div>
     </div>
@@ -180,7 +189,7 @@
         // ==========================================================
         // 核心常量和数据定义 (已嵌入您的 31 天数据)
         // ==========================================================
-        const EPOCH_DATE = new Date(Date.UTC(2025, 9, 22)); // 2024年1月1日
+        const EPOCH_DATE = new Date(Date.UTC(2024, 0, 1)); // 2024年1月1日
         const MS_PER_DAY = 1000 * 60 * 60 * 24;
 
         // 经文数组：包含 Title, Text, Ref, Think, Prayer
@@ -190,7 +199,7 @@
                 text: "你看父赐给我们是何等的慈爱！",
                 ref: "约翰一书3章1节",
                 think: "“我不再是从前的我了，现在的我是新造的人。”这是我儿子杰夫在一次学校集会上，向学生们描述上帝在他生命中的改变。杰夫曾是个海洛因成瘾者，他从前是以所犯的罪和错误来看待自己，但现在他视自己为上帝的儿女。\n\n圣经也用此应许来激励我们：“若有人在基督里，他就是新造的人，旧事已过，都变成新的了”（哥林多后书5章17节）。无论我们曾是怎么样的人，也无论过去曾做过什么，当我们相信耶稣已拯救我们，且接受祂藉着被钉十架所赐的赦免，你我就成为新造的人。自从人类始祖被赶出伊甸园之后，我们的罪使你我与上帝隔离，但如今上帝“藉着基督使我们跟祂和好”，不将我们的过犯“归到”我们身上（18-19节）。我们是祂挚爱的儿女（约翰一书3章1-2节），我们的罪孽被洗净，成为有基督生命的新造之人。\n\n耶稣拯救我们脱离罪，以及罪的权势，使我们与上帝有了新的关系──我们不再为自己而活，乃是为替我们死而复活的主而活（哥林多后书5章15节)。在元旦的这一天，让我们回想上帝那改变生命的爱，激励我们活出新的身份和目标，好叫我们能引导别人认识这位救主，祂能使他们成为新造的人！",
-                prayerContent: "上帝能使你有一个新的开始，对你有何意义？\n你要如何像“新造的人”那样生活？\n当我们接受耶稣白白赐下的宽恕与和好时，恐惧和沉重的负担都会成为过去，取而代之的是新的希望！\n阅读一月主题文章\n阿爸天父，感谢祢\n差派祢的爱子来拯救我，\n请祢也差派我往需要祢的人那里去。"
+                prayerContent: "上帝能使你有一个新的开始，对你有何意义？\n你要如何像“新造的人”那样生活？\n当我们接受耶稣白白赐下的宽恕与和好时，恐惧和沉重的负担都会成为过去，取而代之的是新的希望！\n阿爸天父，感谢祢\n差派祢的爱子来拯救我，\n请祢也差派我往需要祢的人那里去。"
             },
             {
                 title: "复活之子",
@@ -308,7 +317,7 @@
                 title: "洗脚和洗盘",
                 text: "我给你们作了榜样，叫你们照着我向你们所做的去做。",
                 ref: "约翰福音13章15节",
-                think: "在结婚50周年纪念日这天，查理和妻子洁恩与儿子乔森到一家咖啡馆共进早餐。当天餐厅的人手不足，只有一名经理、厨师和一位十几岁的女服务员。这位服务员要负责帮客人点餐、送餐和收拾桌面，忙得不可开不可交。当他们用完早餐后，查理询问妻儿：“你们接下来几个小时有什么重要的事情吗？”他们俩都摇摇头。\n\n于是，查理和洁恩在征求经理的同意后，到餐厅后面帮忙洗碗，而乔森则收拾凌乱的桌面。乔森说，其实那天他们所做的并不稀奇，因为他的父母从以前就立下榜样，学习耶稣“不是要受人的服事，乃是要服事人”（马可福音10章45节）。\n\n约翰福音13章记载基督与门徒共进最后的晚餐。那晚，身为夫子的耶稣亲自去洗门徒肮脏的脚，藉此教导门徒谦卑服事的原则（14-15节）。如果连耶稣都能做如此卑微的事，为十几个人洗脚，那么门徒也应当乐意去服事别人。\n\n我们也许会在不同的情况下去服事人，但有一件事是相同的，那就是服事能带来极大的喜乐。然而，服事人真正的目的不是要得到别人的称赞，而是要藉由爱心关怀，让所有的赞美都归给这位谦卑舍己的上帝。",
+                think: "在结婚50周年纪念日这天，查理和妻子洁恩与儿子乔森到一家咖啡馆共进早餐。当天餐厅的人手不足，只有一名经理、厨师和一位十几岁的女服务员。这位服务员要负责帮客人点餐、送餐和收拾桌面，忙得不可不可交。当他们用完早餐后，查理询问妻儿：“你们接下来几个小时有什么重要的事情吗？”他们俩都摇摇头。\n\n于是，查理和洁恩在征求经理的同意后，到餐厅后面帮忙洗碗，而乔森则收拾凌乱的桌面。乔森说，其实那天他们所做的并不稀奇，因为他的父母从以前就立下榜样，学习耶稣“不是要受人的服事，乃是要服事人”（马可福音10章45节）。\n\n约翰福音13章记载基督与门徒共进最后的晚餐。那晚，身为夫子的耶稣亲自去洗门徒肮脏的脚，藉此教导门徒谦卑服事的原则（14-15节）。如果连耶稣都能做如此卑微的事，为十几个人洗脚，那么门徒也应当乐意去服事别人。\n\n我们也许会在不同的情况下去服事人，但有一件事是相同的，那就是服事能带来极大的喜乐。然而，服事人真正的目的不是要得到别人的称赞，而是要藉由爱心关怀，让所有的赞美都归给这位谦卑舍己的上帝。",
                 prayerContent: "你何时曾因别人意想不到的帮助而脱离困境？\n在服事人的时候，\n为什么谦卑的态度十分重要？\n慈爱的救主，感谢祢教导我如何成为一个仆人，\n求祢帮助我能谦卑地服事。"
             },
             {
@@ -446,13 +455,47 @@
 
 
         // ==========================================================
-        // 主要逻辑函数
+        // 日期和核心逻辑函数
         // ==========================================================
+
+        // 获取北京时间 (UTC+8) 的 Date 对象
+        function getBeijingDate() {
+            // 获取当前 UTC 时间（毫秒）
+            const now = new Date();
+            const utc = now.getTime() + (now.getTimezoneOffset() * 60000);
+            // 转换为北京时间 (UTC+8)
+            const beijing_time = new Date(utc + (3600000 * 8));
+            return beijing_time;
+        }
+
+        // 格式化日期并显示
+        function displayCurrentDate(date) {
+            const dateDisplay = document.getElementById('date-display');
+            const options = { 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric', 
+                weekday: 'long' 
+            };
+            // 使用 toLocaleDateString 格式化为中文日期
+            const formattedDate = date.toLocaleDateString('zh-CN', options);
+            dateDisplay.innerText = formattedDate + " (北京时间)";
+        }
+
         function getDailyVerse() {
-            const today = new Date();
-            // 使用 UTC 时间计算，保证全球用户的每日经文一致性
-            const today_utc = Date.UTC(today.getFullYear(), today.getMonth(), today.getDate());
-            const days_diff = Math.floor((today_utc - EPOCH_DATE) / MS_PER_DAY);
+            const beijingDate = getBeijingDate();
+            displayCurrentDate(beijingDate);
+
+            // 提取日期部分进行计算：年, 月 (0-11), 日 (1-31)
+            const year = beijingDate.getFullYear();
+            const month = beijingDate.getMonth();
+            const date = beijingDate.getDate();
+
+            // 计算与起始日期 (2024-01-01 UTC) 的天数差
+            // 为了保证与 EPOCH_DATE (2024, 0, 1 UTC) 对齐，使用 UTC 时间进行计算
+            const today_utc_for_calc = Date.UTC(year, month, date);
+            const days_diff = Math.floor((today_utc_for_calc - EPOCH_DATE.getTime()) / MS_PER_DAY);
+            
             // 通过取模运算确保索引在经文总数范围内
             const verse_index = days_diff % VERSES.length;
             const verse = VERSES[verse_index];
@@ -462,11 +505,11 @@
             document.getElementById('verse-text').innerText = verse.text;
             document.getElementById('verse-ref').innerText = "— " + verse.ref;
             
-            // 将思考和祷告内容预加载到弹出框中 (使用 innerHTML 并处理换行符)
+            // 将思考和祷告内容预加载到弹出框中
             const thinkContentElement = document.getElementById('think-content');
             const prayerContentElement = document.getElementById('prayer-content');
             
-            // 使用正则表达式将换行符 (\n, \r\n, \r) 替换为 <br> 标签，以便在 HTML 中正确显示换行
+            // 使用正则表达式将换行符替换为 <br> 标签
             const replaceNewlines = (text) => text.replace(/(\r\n|\n|\r)/gm, '<br>');
 
             if (thinkContentElement && verse.think) {
