@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>每日灵粮</title>
+    <title>每日圣经</title>
     <style>
         /* 全局背景和居中 */
         body { 
@@ -12,7 +12,7 @@
             padding: 20px;
             max-width: 600px;
             margin: 0 auto;
-            background-color: #f0f4f8; /* 轻微背景色以衬托毛玻璃效果 */
+            background-color: #f0f4f8; 
         }
         
         /* 容器居中 */
@@ -32,7 +32,7 @@
             text-align: center;
         }
 
-        /* 经文内容样式 - 居中 */
+        /* 经文内容样式 - 居中 (已移除方框效果) */
         #verse-text { 
             font-size: 1.2em; 
             margin: 25px 0; 
@@ -40,11 +40,12 @@
             font-style: italic;
             color: #555;
             padding: 15px;
-            border-radius: 8px;
             text-align: center; /* 文本居中 */
             max-width: 90%; /* 控制宽度 */
-            background: rgba(255, 255, 255, 0.7); /* 轻微透明背景 */
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            /* 以下是移除方框样式的关键： */
+            background: none; 
+            border-radius: 0;
+            box-shadow: none;
         }
 
         /* 经文出处样式 - 居中 */
@@ -62,49 +63,47 @@
             gap: 20px;
         }
         
-        /* -------------------- 毛玻璃按钮效果 -------------------- */
+        /* -------------------- 现代按钮效果 (已移除模糊) -------------------- */
         .action-button {
             padding: 12px 24px;
             font-size: 1em;
             font-weight: 600;
             cursor: pointer;
-            border: 1px solid rgba(255, 255, 255, 0.3); /* 边框 */
-            border-radius: 12px;
-            transition: all 0.3s ease;
+            border: none; /* 移除边框 */
+            border-radius: 10px; /* 略微圆角 */
+            transition: all 0.2s ease;
             
-            /* 核心毛玻璃效果 */
-            background: rgba(255, 255, 255, 0.2); /* 轻微透明背景 */
-            backdrop-filter: blur(10px); /* 模糊背景 */
-            -webkit-backdrop-filter: blur(10px); /* 兼容性 */
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* 阴影 */
-            color: #1a1a1a; /* 默认文字颜色 */
+            /* 核心：使用实体颜色，移除模糊效果 */
+            background: #ffffff; 
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 柔和阴影 */
+            color: #1a1a1a; 
+            /* 移除毛玻璃相关属性 */
+            backdrop-filter: none; 
+            -webkit-backdrop-filter: none; 
         }
         
         /* 按钮悬停/激活效果 */
         .action-button:hover {
-            background: rgba(255, 255, 255, 0.35);
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
-            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+            transform: translateY(-1px);
         }
         
         /* 分享按钮特定颜色（可选）*/
         #share-button {
             color: #007BFF;
-            text-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
         }
         /* 祷告按钮特定颜色（可选）*/
         #prayer-button {
             color: #28A745;
-            text-shadow: 0 0 5px rgba(40, 167, 69, 0.3);
         }
         /* ---------------------------------------------------- */
 
 
-        /* 弹出层（Modal）样式 */
+        /* 弹出层（Modal）样式 - 保留毛玻璃效果以保持高级感 */
         .modal {
             display: none; 
             position: fixed; 
-            z-index: 10; /* 确保在最上层 */
+            z-index: 10; 
             left: 0;
             top: 0;
             width: 100%; 
@@ -114,7 +113,7 @@
         }
         .modal-content {
             background: rgba(255, 255, 255, 0.95); /* 稍透明 */
-            backdrop-filter: blur(8px);
+            backdrop-filter: blur(8px); /* 模态框保留模糊效果 */
             margin: 10% auto;
             padding: 30px;
             border: 1px solid rgba(255, 255, 255, 0.5);
@@ -157,14 +156,14 @@
     </div>
     
     <div id="actions">
-        <button id="share-button" class="action-button">分享 (Think)</button>
+        <button id="share-button" class="action-button">分享</button> 
         <button id="prayer-button" class="action-button">祷告</button>
     </div>
 
     <div id="thinkModal" class="modal">
         <div class="modal-content">
             <span class="close-button" id="closeThink">&times;</span>
-            <div id="modal-header">今日思考与分享 (Think)</div>
+            <div id="modal-header">今日思考与分享</div>
             <div id="think-content">正在加载思考内容...</div>
         </div>
     </div>
@@ -309,7 +308,7 @@
                 title: "洗脚和洗盘",
                 text: "我给你们作了榜样，叫你们照着我向你们所做的去做。",
                 ref: "约翰福音13章15节",
-                think: "在结婚50周年纪念日这天，查理和妻子洁恩与儿子乔森到一家咖啡馆共进早餐。当天餐厅的人手不足，只有一名经理、厨师和一位十几岁的女服务员。这位服务员要负责帮客人点餐、送餐和收拾桌面，忙得不可开交。当他们用完早餐后，查理询问妻儿：“你们接下来几个小时有什么重要的事情吗？”他们俩都摇摇头。\n\n于是，查理和洁恩在征求经理的同意后，到餐厅后面帮忙洗碗，而乔森则收拾凌乱的桌面。乔森说，其实那天他们所做的并不稀奇，因为他的父母从以前就立下榜样，学习耶稣“不是要受人的服事，乃是要服事人”（马可福音10章45节）。\n\n约翰福音13章记载基督与门徒共进最后的晚餐。那晚，身为夫子的耶稣亲自去洗门徒肮脏的脚，藉此教导门徒谦卑服事的原则（14-15节）。如果连耶稣都能做如此卑微的事，为十几个人洗脚，那么门徒也应当乐意去服事别人。\n\n我们也许会在不同的情况下去服事人，但有一件事是相同的，那就是服事能带来极大的喜乐。然而，服事人真正的目的不是要得到别人的称赞，而是要藉由爱心关怀，让所有的赞美都归给这位谦卑舍己的上帝。",
+                think: "在结婚50周年纪念日这天，查理和妻子洁恩与儿子乔森到一家咖啡馆共进早餐。当天餐厅的人手不足，只有一名经理、厨师和一位十几岁的女服务员。这位服务员要负责帮客人点餐、送餐和收拾桌面，忙得不可开不可交。当他们用完早餐后，查理询问妻儿：“你们接下来几个小时有什么重要的事情吗？”他们俩都摇摇头。\n\n于是，查理和洁恩在征求经理的同意后，到餐厅后面帮忙洗碗，而乔森则收拾凌乱的桌面。乔森说，其实那天他们所做的并不稀奇，因为他的父母从以前就立下榜样，学习耶稣“不是要受人的服事，乃是要服事人”（马可福音10章45节）。\n\n约翰福音13章记载基督与门徒共进最后的晚餐。那晚，身为夫子的耶稣亲自去洗门徒肮脏的脚，藉此教导门徒谦卑服事的原则（14-15节）。如果连耶稣都能做如此卑微的事，为十几个人洗脚，那么门徒也应当乐意去服事别人。\n\n我们也许会在不同的情况下去服事人，但有一件事是相同的，那就是服事能带来极大的喜乐。然而，服事人真正的目的不是要得到别人的称赞，而是要藉由爱心关怀，让所有的赞美都归给这位谦卑舍己的上帝。",
                 prayerContent: "你何时曾因别人意想不到的帮助而脱离困境？\n在服事人的时候，\n为什么谦卑的态度十分重要？\n慈爱的救主，感谢祢教导我如何成为一个仆人，\n求祢帮助我能谦卑地服事。"
             },
             {
@@ -464,15 +463,22 @@
             document.getElementById('verse-ref').innerText = "— " + verse.ref;
             
             // 将思考和祷告内容预加载到弹出框中 (使用 innerHTML 并处理换行符)
-            // \n 替换为 <br> 以便在 HTML 中显示换行
             const thinkContentElement = document.getElementById('think-content');
             const prayerContentElement = document.getElementById('prayer-content');
             
-            if (thinkContentElement) {
-                thinkContentElement.innerHTML = verse.think.replace(/(\r\n|\n|\r)/gm, '<br>');
+            // 使用正则表达式将换行符 (\n, \r\n, \r) 替换为 <br> 标签，以便在 HTML 中正确显示换行
+            const replaceNewlines = (text) => text.replace(/(\r\n|\n|\r)/gm, '<br>');
+
+            if (thinkContentElement && verse.think) {
+                thinkContentElement.innerHTML = replaceNewlines(verse.think);
+            } else if (thinkContentElement) {
+                 thinkContentElement.innerHTML = "无分享内容";
             }
-            if (prayerContentElement) {
-                prayerContentElement.innerHTML = verse.prayerContent.replace(/(\r\n|\n|\r)/gm, '<br>');
+            
+            if (prayerContentElement && verse.prayerContent) {
+                prayerContentElement.innerHTML = replaceNewlines(verse.prayerContent);
+            } else if (prayerContentElement) {
+                 prayerContentElement.innerHTML = "无祷告指引";
             }
         }
 
