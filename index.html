@@ -104,6 +104,10 @@
         #prayer-button {
             color: #28A745;
         }
+        /* 咨询按钮特定颜色（可选）*/
+        #consultation-button {
+            color: #ff9800; /* 使用一个中性的颜色 */
+        }
         /* ---------------------------------------------------- */
 
 
@@ -150,7 +154,7 @@
             text-align: center;
         }
         /* 弹出框内容样式，用于处理换行符 */
-        #think-content, #prayer-content {
+        #think-content, #prayer-content, #consultation-content {
             line-height: 1.6;
             white-space: pre-wrap; /* 保持换行符和空格 */
         }
@@ -167,6 +171,7 @@
     <div id="actions">
         <button id="share-button" class="action-button">分享</button> 
         <button id="prayer-button" class="action-button">祷告</button>
+        <button id="consultation-button" class="action-button">咨询</button>
     </div>
 
     <div id="thinkModal" class="modal">
@@ -182,6 +187,18 @@
             <span class="close-button" id="closePrayer">&times;</span>
             <div id="modal-header">祷告指引</div>
             <div id="prayer-content">正在加载祷告内容...</div>
+        </div>
+    </div>
+    
+    <div id="consultationModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" id="closeConsultation">&times;</span>
+            <div id="modal-header">联系我们</div>
+            <div id="consultation-content">
+                联系方式：15757386469<br>
+                微信：z61758101<br>
+                Whatsapp：+8615757386469
+            </div>
         </div>
     </div>
 
@@ -408,7 +425,7 @@
                 title: "全然顺服主",
                 text: "人就是赚得全世界，赔上自己的生命，有什么益处呢？",
                 ref: "马可福音8章36节",
-                think: "中国布道家宋尚节出生在一个牧师家庭，在家排行第六。在1920年，他获得赴美留学的奖学金，毕业时荣获最高荣誉学位，后来继续进修先后获得硕士与博士学位。但他在求学过程中却远离上帝。然而，在1927年的一个晚上，他将自己的生命献给基督，并蒙主呼召成为一名传道人。\n\n当时，在中国有许多赚取高薪的机会正等着他，但在搭船回国途中他受到圣灵感动，愿意抛开自己的雄心壮志。为了表达他的决心，他把所有的奖状都扔进海里，只留下博士学位证书，以示对父母的尊重。\n\n耶稣提醒那些想要跟从祂的人﹕“人就是赚得全世界，赔上自己的生命，有什么益处呢？”（马可福音8章36节）而宋尚节深明此理。当我们舍己，离开旧有的生活来跟随基督和祂的带领时（34-35节），意味着可能需要牺牲个人的欲望和物质财富，因为这些都会让人分心，使我们无法专心跟随祂。\n\n蒙召之后的12年里，宋尚节博士尽心竭力执行上帝赋予他的使命，在中国和东南亚各地向数千人传福音。那我们呢？也许我们没有蒙召成为传道人或宣教士，但无论上帝呼召我们去哪里服事，愿祂的灵在我们身上工作，使我们能完全顺服祂。",
+                think: "中国布道家宋尚节出生在一个牧师家庭，在家排行第六。在1920年，他获得赴美留学的奖学金，毕业时荣获最高荣誉学位，后来继续进修先后获得硕士与博士学位。但在他求学过程中却远离上帝。然而，在1927年的一个晚上，他将自己的生命献给基督，并蒙主呼召成为一名传道人。\n\n当时，在中国有许多赚取高薪的机会正等着他，但在搭船回国途中他受到圣灵感动，愿意抛开自己的雄心壮志。为了表达他的决心，他把所有的奖状都扔进海里，只留下博士学位证书，以示对父母的尊重。\n\n耶稣提醒那些想要跟从祂的人﹕“人就是赚得全世界，赔上自己的生命，有什么益处呢？”（马可福音8章36节）而宋尚节深明此理。当我们舍己，离开旧有的生活来跟随基督和祂的带领时（34-35节），意味着可能需要牺牲个人的欲望和物质财富，因为这些都会让人分心，使我们无法专心跟随祂。\n\n蒙召之后的12年里，宋尚节博士尽心竭力执行上帝赋予他的使命，在中国和东南亚各地向数千人传福音。那我们呢？也许我们没有蒙召成为传道人或宣教士，但无论上帝呼召我们去哪里服事，愿祂的灵在我们身上工作，使我们能完全顺服祂。",
                 prayerContent: "你需要舍弃什么才能真正跟随耶稣？\n有哪些个人的抱负是你无法放下的？\n天父，请帮助我放下一切拦阻，\n全然顺服祢。"
             },
             {
@@ -534,10 +551,15 @@
         // ==========================================================
         const shareButton = document.getElementById('share-button');
         const prayerButton = document.getElementById('prayer-button');
+        const consultationButton = document.getElementById('consultation-button'); // 新增按钮
+        
         const thinkModal = document.getElementById('thinkModal');
         const prayerModal = document.getElementById('prayerModal');
+        const consultationModal = document.getElementById('consultationModal'); // 新增模态框
+        
         const closeThink = document.getElementById('closeThink');
         const closePrayer = document.getElementById('closePrayer');
+        const closeConsultation = document.getElementById('closeConsultation'); // 新增关闭按钮
 
 
         // 分享/Think 功能（显示思考内容弹出框）
@@ -551,6 +573,13 @@
         if (prayerButton) {
             prayerButton.onclick = function() {
                 prayerModal.style.display = "block";
+            }
+        }
+        
+        // 咨询功能（显示联系方式弹出框）
+        if (consultationButton) {
+            consultationButton.onclick = function() {
+                consultationModal.style.display = "block";
             }
         }
 
@@ -567,6 +596,13 @@
                 prayerModal.style.display = "none";
             }
         }
+        
+        // 关闭 CONSULTATION 弹出框
+        if (closeConsultation) {
+            closeConsultation.onclick = function() {
+                consultationModal.style.display = "none";
+            }
+        }
 
         // 点击窗口外部关闭所有弹出框
         window.onclick = function(event) {
@@ -575,6 +611,9 @@
             }
             if (event.target == prayerModal) {
                 prayerModal.style.display = "none";
+            }
+            if (event.target == consultationModal) { // 新增的判断
+                consultationModal.style.display = "none";
             }
         }
     </script>
