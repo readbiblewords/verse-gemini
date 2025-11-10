@@ -23,7 +23,7 @@
             display: flex;
             flex-direction: column;
             align-items: center; /* 块级元素居中 */
-            padding-bottom: 20px; /* 移除底部导航栏后的调整 */
+            padding-bottom: 20px; 
         }
 
         /* 动态标题样式 - 居中（保持不变） */
@@ -38,10 +38,10 @@
 
         /* 日期显示样式 - 居中（保持不变） */
         #date-display {
-            font-size: 1em; /* 小字 */
+            font-size: 0.9em; /* 小字 */
             color: #777;
             margin-bottom: 30px; /* 增加空间 */
-            font-weight: bold;
+            font-weight: 500;
             text-align: center;
         }
 
@@ -62,8 +62,8 @@
         #verse-ref {
             font-size: 1em;
             color: #666; /* 灰色文字 */
-            font-weight: 500;
-            margin-bottom: 25px;
+            font-weight: bold;
+            margin-bottom: 30px;
             cursor: pointer;
             text-align: center; /* 居中显示 */
         }
@@ -89,7 +89,7 @@
             gap: 15px; /* 增加按钮间距 */
         }
 
-        /* 按钮样式 - 毛玻璃效果 */
+        /* 按钮样式 - 毛玻璃效果 (基础样式) */
         .action-button {
             flex: 1; /* 均分空间 */
             padding: 12px 20px;
@@ -102,7 +102,6 @@
             
             /* 毛玻璃效果 */
             background-color: rgba(255, 255, 255, 0.6); /* 半透明白色 */
-            color: #1a1a1a; /* 深色文字 */
             backdrop-filter: blur(8px); 
             -webkit-backdrop-filter: blur(8px); 
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); 
@@ -114,10 +113,17 @@
             transform: translateY(-2px);
         }
 
-        /* 移除原先的固定颜色覆盖 */
-        #understandButton, #prayerButton, #consultationButton {
-            background-color: initial;
-            color: #1a1a1a;
+        /* 新增：为每个按钮添加特定文字颜色 */
+        #understandButton {
+            color: #2196F3; /* 蓝色 */
+        }
+        
+        #prayerButton {
+            color: #4CAF50; /* 绿色 */
+        }
+        
+        #consultationButton {
+            color: #ff9800; /* 橙色 */
         }
 
         /* 每日思想/祷告内容样式 */
@@ -128,7 +134,7 @@
             white-space: pre-wrap; /* 保留换行符和空格 */
         }
         
-        /* ---------------- Modal (弹出框) 样式 - 保持上一次的优化 ---------------- */
+        /* ---------------- Modal (弹出框) 样式 - 保持优化 ---------------- */
         
         /* Modal 覆盖层 */
         .modal {
