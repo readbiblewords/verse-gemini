@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>每日圣经</title>
+    <!-- PWA Manifest Link -->
+    <link rel="manifest" href="/manifest.json">
     <style>
         /* 全局背景和居中 */
         body { 
@@ -200,6 +202,7 @@
             <div id="verse-reference"></div>
         </div>
         
+        <!-- 底部导航按钮 -->
         <div id="button-container">
             <button id="think-button" class="nav-button">沉思 (THINK)</button>
             <button id="prayer-button" class="nav-button">祷告 (PRAYER)</button>
@@ -207,6 +210,7 @@
         </div>
     </div>
 
+    <!-- THINK 弹出框 -->
     <div id="thinkModal" class="modal">
         <div class="modal-content">
             <span class="close" id="closeThink">&times;</span>
@@ -219,6 +223,7 @@
         </div>
     </div>
     
+    <!-- PRAYER 弹出框 -->
     <div id="prayerModal" class="modal">
         <div class="modal-content">
             <span class="close" id="closePrayer">&times;</span>
@@ -231,6 +236,7 @@
         </div>
     </div>
     
+    <!-- CONSULTATION 弹出框 -->
     <div id="consultationModal" class="modal">
         <div class="modal-content">
             <span class="close" id="closeConsultation">&times;</span>
@@ -244,18 +250,16 @@
 <script>
     // ==========================================================
     // Service Worker 注册代码 (PWA 核心)
-    // 必须确保在其他脚本执行前运行
     // ==========================================================
     if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
+            // 确保 sw.js 文件的路径正确
             navigator.serviceWorker.register('/sw.js')
                 .then(registration => {
                     console.log('Service Worker registered successfully. Scope:', registration.scope);
                 })
                 .catch(error => {
-                    // 当 Service Worker 无法注册时，通常是网络连接问题
                     console.error('Service Worker registration failed:', error);
-                    // 即使注册失败，主页面也会加载，但不会有离线功能
                 });
         });
     }
@@ -339,9 +343,7 @@
         const diffTime = Math.abs(todayUTC - EPOCH_DATE);
         const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
         
-        // 模 31 运算，确保索引在 0 到 30 之间
-        // diffDays % 31 得到的是从 0 到 30 的循环天数。
-        // 因为 VERSES 数组是 0-based，所以这个结果就是我们要的索引。
+        // 模 31 运算
         return diffDays % VERSES.length;
     }
 
@@ -375,7 +377,7 @@
         
         const closeThink = document.getElementById("closeThink");
         const closePrayer = document.getElementById("closePrayer");
-        const closeConsultation = document.getElementById("closeConsultation"); // 新增的关闭按钮
+        const closeConsultation = document.getElementById("closeConsultation");
         
         // THINK 功能（显示沉思指引弹出框）
         if (thinkButton) {
@@ -427,7 +429,7 @@
             if (event.target == prayerModal) {
                 prayerModal.style.display = "none";
             }
-            if (event.target == consultationModal) { // 新增的判断
+            if (event.target == consultationModal) {
                 consultationModal.style.display = "none";
             }
         }
