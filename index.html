@@ -15,6 +15,7 @@
             max-width: 600px;
             margin: 0 auto;
             background-color: #f0f4f8; 
+            color: #333;
         }
         
         /* 容器居中 */
@@ -22,9 +23,10 @@
             display: flex;
             flex-direction: column;
             align-items: center; /* 块级元素居中 */
+            padding-bottom: 20px; /* 移除底部导航栏后的调整 */
         }
 
-        /* 动态标题样式 - 居中 */
+        /* 动态标题样式 - 居中（保持不变） */
         #verse-title { 
             font-size: 1.8em; 
             margin-top: 20px; 
@@ -34,118 +36,129 @@
             text-align: center;
         }
 
-        /* 新增：日期显示样式 */
+        /* 日期显示样式 - 居中（保持不变） */
         #date-display {
             font-size: 0.9em; /* 小字 */
             color: #777;
-            margin-bottom: 25px; /* 在日期和经文之间留出空间 */
+            margin-bottom: 30px; /* 增加空间 */
             font-weight: 500;
+            text-align: center;
         }
 
-        /* 经文内容样式 - 居中 */
+        /* 经文内容样式 - 居中，无背景 */
         #verse-content {
-            font-size: 1.2em;
-            line-height: 1.6;
-            color: #333;
-            margin-bottom: 30px;
-            padding: 20px;
-            background-color: #ffffff;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-            text-align: justify; /* 经文内容左右对齐 */
-            width: 90%; /* 控制最大宽度 */
+            font-size: 1.3em; 
+            line-height: 1.8; /* 优化可读性 */
+            color: #1a1a1a;
+            margin-bottom: 25px;
+            padding: 0 10px; 
+            font-weight: 400;
+            text-align: center; /* 居中显示 */
+            background: none; /* 移除背景 */
+            border: none; /* 移除边框 */
         }
 
-        /* 引用样式 - 居中 */
-        #verse-reference {
+        /* 经文出处样式 - 居中，灰色文字 */
+        #verse-ref {
             font-size: 1em;
-            font-style: italic;
-            color: #555;
-            margin-top: 15px;
-            font-weight: 500;
-            border-top: 1px solid #eee;
-            padding-top: 10px;
-        }
-
-        /* 底部导航按钮容器 */
-        #button-container {
-            display: flex;
-            justify-content: center;
-            gap: 15px; /* 按钮间距 */
-            margin-top: 30px;
-        }
-
-        /* 按钮基础样式 */
-        .nav-button {
-            padding: 12px 20px;
-            font-size: 1em;
-            cursor: pointer;
-            border: none;
-            border-radius: 25px;
-            transition: all 0.3s ease;
+            color: #666; /* 灰色文字 */
             font-weight: bold;
-            text-transform: uppercase;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+            cursor: pointer;
+            text-align: center; /* 居中显示 */
         }
 
-        /* THINK 按钮样式 */
-        #think-button {
-            background-color: #4CAF50; /* 绿色 */
-            color: white;
-        }
-
-        #think-button:hover {
-            background-color: #45a049;
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
-        }
-
-        /* PRAYER 按钮样式 */
-        #prayer-button {
-            background-color: #2196F3; /* 蓝色 */
-            color: white;
-        }
-
-        #prayer-button:hover {
-            background-color: #0b7dda;
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
-        }
-
-        /* 咨询按钮 */
-        #consultation-button {
-            background-color: #FF9800; /* 橙色 */
-            color: white;
+        /* 主要内容卡片样式 - 现在只包含经文内容和引用 */
+        #daily-card {
+            background-color: #ffffff;
+            border-radius: 16px;
+            padding: 20px 0; /* 调整内边距，因为标题和日期移出去了 */
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            text-align: center; /* 卡片内内容居中 */
+            margin-bottom: 30px;
         }
         
-        #consultation-button:hover {
-            background-color: #fb8c00;
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+        /* 按钮容器 */
+        #button-group {
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+            max-width: 500px;
+            margin-bottom: 30px;
+            gap: 15px; /* 增加按钮间距 */
         }
 
-        /* 弹出框 Modal 基础样式 */
+        /* 按钮样式 - 毛玻璃效果 */
+        .action-button {
+            flex: 1; /* 均分空间 */
+            padding: 12px 20px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            border: 1px solid rgba(255, 255, 255, 0.8); /* 浅色边框 */
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            
+            /* 毛玻璃效果 */
+            background-color: rgba(255, 255, 255, 0.6); /* 半透明白色 */
+            color: #1a1a1a; /* 深色文字 */
+            backdrop-filter: blur(8px); 
+            -webkit-backdrop-filter: blur(8px); 
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); 
+        }
+
+        .action-button:hover {
+            background-color: rgba(255, 255, 255, 0.8);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+            transform: translateY(-2px);
+        }
+
+        /* 移除原先的固定颜色覆盖 */
+        #understandButton, #prayerButton, #consultationButton {
+            background-color: initial;
+            color: #1a1a1a;
+        }
+
+        /* 每日思想/祷告内容样式 */
+        #think-content, #prayer-content {
+            font-size: 1.0em;
+            line-height: 1.8;
+            color: #444;
+            white-space: pre-wrap; /* 保留换行符和空格 */
+        }
+        
+        /* ---------------- Modal (弹出框) 样式 - 保持上一次的优化 ---------------- */
+        
+        /* Modal 覆盖层 */
         .modal {
-            display: none; /* 默认隐藏 */
+            display: none; 
             position: fixed; 
-            z-index: 1; 
+            z-index: 1000; 
             left: 0;
             top: 0;
-            width: 100%; 
-            height: 100%; 
-            overflow: auto; 
-            background-color: rgba(0,0,0,0.4); /* 黑色半透明背景 */
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.7); 
+            display: flex;
+            align-items: center; /* 垂直居中 */
+            justify-content: center; /* 水平居中 */
         }
 
-        /* 弹出框内容样式 */
+        /* 弹出框内容 */
         .modal-content {
-            background-color: #fefefe;
-            margin: 15% auto; /* 距顶部和底部的边距 */
-            padding: 20px;
-            border: 1px solid #888;
-            width: 80%; 
-            max-width: 400px; /* 控制最大宽度 */
-            border-radius: 10px;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-            position: relative;
-            text-align: left; /* 文本左对齐 */
+            background-color: #fff;
+            padding: 25px;
+            border: none;
+            width: 90%; 
+            max-width: 450px; 
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            animation-name: animatetop;
+            animation-duration: 0.4s;
+            max-height: 90vh; /* 限制高度并允许滚动 */
+            overflow-y: auto; 
+            text-align: left; 
         }
 
         /* 关闭按钮 */
@@ -154,256 +167,248 @@
             float: right;
             font-size: 28px;
             font-weight: bold;
+            line-height: 1; 
+            margin-top: -10px; 
+            margin-right: -10px;
         }
 
         .close:hover,
         .close:focus {
-            color: #000;
+            color: #333;
             text-decoration: none;
             cursor: pointer;
         }
         
-        /* 弹出框内文本样式 */
-        .modal-content p, .modal-content h3 {
-            margin: 10px 0;
+        /* 模态框头部 */
+        .modal-header h2 {
+            margin-top: 0;
+            margin-bottom: 15px;
+            color: #007bff;
+            font-size: 1.5em;
+            padding-bottom: 5px;
+            border-bottom: 2px solid #f0f4f8;
+        }
+
+        /* 模态框内容体 */
+        .modal-body p {
+            margin-top: 0;
+            margin-bottom: 15px; 
+            line-height: 1.6;
         }
         
-        /* 手机端优化 */
-        @media (max-width: 480px) {
-            body {
-                padding: 10px;
-            }
-            #verse-content {
-                font-size: 1.1em;
-                padding: 15px;
-            }
-            #button-container {
-                flex-direction: column;
-                gap: 10px;
-            }
-            .nav-button {
-                width: 100%;
-                padding: 15px 0;
-            }
-            .modal-content {
-                width: 90%;
-                margin: 20% auto;
-            }
+        /* 动画效果 */
+        @keyframes animatetop {
+            from {top: -300px; opacity: 0}
+            to {top: 0; opacity: 1}
         }
+
     </style>
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
 
     <div id="verse-container">
-        <h1 id="verse-title">每日圣经 - 读经领受</h1>
+        
+        <!-- 标题和日期移到卡片外面 -->
+        <h1 id="verse-title"></h1>
         <div id="date-display"></div>
-        <div id="verse-content">
-            <p>正在加载今日经文...</p>
-            <div id="verse-reference"></div>
+        
+        <div id="daily-card">
+            <!-- 经文内容 - 移除 blockquote class -->
+            <div id="verse-content">
+                正在加载今天的经文...
+            </div>
+            
+            <!-- 经文出处 (可点击) -->
+            <div id="verse-ref"></div>
+        </div>
+
+        <!-- 理解/祷告/交流 按钮组 -->
+        <div id="button-group">
+            <button class="action-button" id="understandButton">理解</button>
+            <button class="action-button" id="prayerButton">祷告</button>
+            <button class="action-button" id="consultationButton">交流</button>
         </div>
         
-        <!-- 底部导航按钮 -->
-        <div id="button-container">
-            <button id="think-button" class="nav-button">沉思 (THINK)</button>
-            <button id="prayer-button" class="nav-button">祷告 (PRAYER)</button>
-            <button id="consultation-button" class="nav-button">咨询 (CONSULT)</button>
+    </div>
+
+    <!-- ---------------- 弹出框 (Modals) 区域 ---------------- -->
+
+    <!-- 理解 UNDERSTAND 弹出框 (原思想 THINK) -->
+    <div id="understandModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close" id="closeUnderstand">&times;</span>
+            <div class="modal-header">
+                <h2>今日理解</h2>
+            </div>
+            <div class="modal-body">
+                <p id="think-content">正在加载理解内容...</p>
+            </div>
         </div>
     </div>
 
-    <!-- THINK 弹出框 -->
-    <div id="thinkModal" class="modal">
-        <div class="modal-content">
-            <span class="close" id="closeThink">&times;</span>
-            <h3>沉思指引 (THINK)</h3>
-            <p><strong>T</strong>hanks: 经文让你感恩什么？</p>
-            <p><strong>H</strong>elp: 经文让你请求什么帮助？</p>
-            <p><strong>I</strong>nsight: 经文让你洞察到什么真理？</p>
-            <p><strong>N</strong>ew obedience: 经文让你决定做什么新的顺服行动？</p>
-            <p><strong>K</strong>nowledge of God: 经文让你更认识上帝的哪一方面？</p>
-        </div>
-    </div>
-    
-    <!-- PRAYER 弹出框 -->
-    <div id="prayerModal" class="modal">
+    <!-- 祷告 PRAYER 弹出框 -->
+    <div id="prayerModal" class="modal" style="display: none;">
         <div class="modal-content">
             <span class="close" id="closePrayer">&times;</span>
-            <h3>祷告指引 (PRAYER)</h3>
-            <p>1. **赞美**：为上帝的属性和作为献上赞美。</p>
-            <p>2. **认罪**：为自己今天或近期的亏欠和软弱认罪。</p>
-            <p>3. **感恩**：为生活中的恩典和祝福献上感谢。</p>
-            <p>4. **代求**：为家人、朋友、教会和世界献上祈求。</p>
-            <p>5. **祈愿**：为自己当下的需要和经文所启示的顺服行动祈求力量。</p>
+            <div class="modal-header">
+                <h2>祷告指引</h2>
+            </div>
+            <div class="modal-body">
+                <p id="prayer-content">正在加载祷告内容...</p>
+            </div>
         </div>
     </div>
-    
-    <!-- CONSULTATION 弹出框 -->
-    <div id="consultationModal" class="modal">
+
+    <!-- 交流 CONSULTATION 弹出框 (原联系方式) -->
+    <div id="consultationModal" class="modal" style="display: none;">
         <div class="modal-content">
             <span class="close" id="closeConsultation">&times;</span>
-            <h3>咨询联系方式</h3>
-            <p>如果您对今天的经文有疑问，或需要进一步的辅导、分享，请通过以下方式联系：</p>
-            <p><strong>电子邮件：</strong><a href="mailto:verse.gemini@gmail.com">verse.gemini@gmail.com</a></p>
-            <p>我们非常乐意与您交流。</p>
+            <div class="modal-header">
+                <h2>交流联系</h2>
+            </div>
+            <div class="modal-body">
+                <p style="margin-bottom: 10px;">
+                    <strong>邮箱：</strong> juvan0926@gmail.com
+                <p style="margin-bottom: 10px;">
+                    <strong>微信：</strong> 18968860469
+                <p style="margin-bottom: 10px;">
+                    <strong>淘宝：</strong> https://m.tb.cn/h.Sr7xvEYKyFQt6jo
+                <p style="margin-bottom: 10px;">
+                    <strong>小红书：</strong> https://xhslink.com/m/4AgROk2mC4
+                </p>
+
+                <p style="font-weight: bold; color: #2196F3; text-align: center;">
+                    我们很乐意与您交流和代祷！
+                </p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 经文出处详情 弹出框 -->
+    <div id="referenceModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close" id="closeReference">&times;</span>
+            <div class="modal-header">
+                <h2>经文出处</h2>
+            </div>
+            <div class="modal-body">
+                <p id="full-ref-text">正在加载出处信息...</p>
+            </div>
         </div>
     </div>
 
-<script>
-    // ==========================================================
-    // Service Worker 注册代码 (PWA 核心)
-    // ==========================================================
-    if ('serviceWorker' in navigator) {
-        window.addEventListener('load', () => {
-            // 确保 sw.js 文件的路径正确
-            navigator.serviceWorker.register('/sw.js')
-                .then(registration => {
-                    console.log('Service Worker registered successfully. Scope:', registration.scope);
-                })
-                .catch(error => {
-                    console.error('Service Worker registration failed:', error);
-                });
-        });
+
+<script type="module">
+    // CSV 数据（这里是示例数据，实际应用中应从外部加载）
+    const csvData = [
+        // 1
+        {
+            day: "1",
+            title: "主里新身份",
+            text: "你看父赐给我们是何等的慈爱！",
+            ref: "约翰一书3章1节",
+            think: "“我不再是从前的我了，现在的我是新造的人。”这是我儿子杰夫在一次学校集会上，向学生们描述上帝在他生命中的改变。杰夫曾是个海洛因成瘾者，他从前是以所犯的罪和错误来看待自己，但现在他视自己为上帝的儿女。\n\n圣经也用此应许来激励我们：“若有人在基督里，他就是新造的人，旧事已过，都变成新的了”（哥林多后书5章17节）。无论我们曾是怎么样的人，也无论过去曾做过什么，当我们相信耶稣已拯救我们，且接受祂藉着被钉十架所赐的赦免，你我就成为新造的人。自从人类始祖被赶出伊甸园之后，我们的罪使你我与上帝隔离，但如今上帝“藉着基督使我们跟祂和好”，不将我们的过犯“归到”我们身上（18-19节）。我们是祂挚爱的儿女（约翰一书3章1-2节），我们的罪孽被洗净，成为有基督生命的新造之人。\n\n耶稣拯救我们脱离罪，以及罪的权势，使我们与上帝有了新的关系──我们不再为自己而活，乃是为替我们死而复活的主而活（哥林多后书5章15节)。在元旦的这一天，让我们回想上帝那改变生命的爱，激励我们活出新的身份和目标，好叫我们能引导别人认识这位救主，祂能使他们成为新造的人。",
+            Prayer: "知道耶稣关注你，如何改变你对自己的看法？\n你周遭有哪些人需要得到关注？\n你如何“停下脚步”，以救主的爱来鼓励他们？\n亲爱的耶稣，感谢祢垂听我的呼求。求祢帮助我，\n如同那位重见光明的瞎子，一生跟随并赞美祢。"
+        },
+        // 2 (Added a second entry for robustness)
+        {
+            day: "2",
+            title: "恩典的记号",
+            text: "我们行事为人是凭着信心，不是凭着眼见。",
+            ref: "哥林多后书5章7节",
+            think: "一位父亲带着小儿子，坐飞机从美国前往加拿大。当飞机穿过一片厚厚的云层时，小儿子开始感到不安，他问父亲：“我们到哪儿了？我们是不是迷路了？”父亲微笑着指着窗外说：“看，我们已经飞到云层上面了。”小儿子往下一看，只见脚下是一片无边无际的云海，仿佛棉花糖铺成的地毯。他立刻安静了下来，因为他知道，父亲带他走在正确的道路上。\n\n人生也常有‘云层’遮盖，让我们感到迷失和不安。我们看不见前方的路，听不见上帝的声音，甚至怀疑祂是否真的与我们同在。但圣经提醒我们，我们的生命之旅不是凭着眼见，而是凭着信心。信心不是感觉，而是在看不见的时候依然相信上帝的应许。即使我们身处低谷，感受不到上帝的同在，我们仍可以确信祂永不离弃我们，祂的恩典足够我们用。我们行事为人，凭着祂的话语，而不是凭着眼前的环境。今天，当你面对生活中的'云层'时，请紧紧抓住这信心的锚。",
+            Prayer: "主啊，感谢祢的应许，即使在困境中，我仍然可以凭着信心前行。求祢坚定我的心，让我不要被眼前的景象所动摇。帮助我学习信靠祢，如同那位紧紧抓住父亲手的孩子。奉主耶稣的名祷告，阿门。"
+        }
+        // ... more data
+    ];
+    
+    // 获取当天的日期
+    function getDayIndex() {
+        const startDate = new Date(new Date().getFullYear(), 0, 1);
+        const today = new Date();
+        const diffTime = today.getTime() - startDate.getTime();
+        const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24)) + 1;
+        return (diffDays % csvData.length) || csvData.length;
     }
 
-    // ==========================================================
-    // 核心常量和数据定义 (原有的脚本逻辑开始)
-    // ==========================================================
-    const EPOCH_DATE = new Date(Date.UTC(2024, 0, 1)); // 2024年1月1日
-    
-    // 31天经文数据 (1-based index for day of month)
-    const VERSES = [
-        // Day 1: January 1st
-        { day: 1, reference: "创世记 1:1", content: "起初，上帝创造天地。" },
-        // Day 2
-        { day: 2, reference: "诗篇 139:14", content: "我要称谢祢，因我受造奇妙可畏；祢的作为奇妙，这是我心深知道的。" },
-        // Day 3
-        { day: 3, reference: "马太福音 6:33", content: "你们要先求祂的国和祂的义，这些东西都要加给你们了。" },
-        // Day 4
-        { day: 4, reference: "约翰福音 3:16", content: "上帝爱世人，甚至将祂的独生子赐给他们，叫一切信祂的，不致灭亡，反得永生。" },
-        // Day 5
-        { day: 5, reference: "罗马书 8:28", content: "我们晓得万事都互相效力，叫爱上帝的人得益处，就是按祂旨意被召的人。" },
-        // Day 6
-        { day: 6, reference: "腓立比书 4:13", content: "我靠着那加给我力量的，凡事都能做。" },
-        // Day 7
-        { day: 7, reference: "以赛亚书 40:31", content: "但那等候耶和华的，必重新得力。他们必如鹰展翅上腾；他们奔跑却不困倦，行走却不疲乏。" },
-        // Day 8
-        { day: 8, reference: "箴言 3:5-6", content: "你要专心仰赖耶和华，不可倚靠自己的聪明，在你一切所行的事上都要认定祂，祂必指引你的路。" },
-        // Day 9
-        { day: 9, reference: "哥林多后书 5:17", content: "若有人在基督里，他就是新造的人，旧事已过，都变成新的了。" },
-        // Day 10
-        { day: 10, reference: "雅各书 1:5", content: "你们中间若有缺少智慧的，应当求那厚赐与众人、也不斥责人的上帝，主就必赐给他。" },
-        // Day 11
-        { day: 11, reference: "希伯来书 11:1", content: "信就是所望之事的实底，是未见之事的确据。" },
-        // Day 12
-        { day: 12, reference: "约翰一书 1:9", content: "我们若认自己的罪，上帝是信实的，是公义的，必要赦免我们的罪，洗净我们一切的不义。" },
-        // Day 13
-        { day: 13, reference: "诗篇 23:1", content: "耶和华是我的牧者，我必不至缺乏。" },
-        // Day 14
-        { day: 14, reference: "提摩太后书 3:16", content: "圣经都是上帝所默示的，于教训、督责、使人归正、教导人学义都是有益的。" },
-        // Day 15
-        { day: 15, reference: "加拉太书 5:22-23", content: "圣灵所结的果子，就是仁爱、喜乐、和平、忍耐、恩慈、良善、信实、温柔、节制。" },
-        // Day 16
-        { day: 16, reference: "彼得前书 5:7", content: "你们要将一切的忧虑卸给上帝，因为祂顾念你们。" },
-        // Day 17
-        { day: 17, reference: "罗马书 12:2", content: "不要效法这个世界，只要心意更新而变化，叫你们察验何为上帝的善良、纯全、可喜悦的旨意。" },
-        // Day 18
-        { day: 18, reference: "申命记 6:5", content: "你要尽心、尽性、尽力爱耶和华你的上帝。" },
-        // Day 19
-        { day: 19, reference: "传道书 3:1", content: "凡事都有定期，天下万务都有定时。" },
-        // Day 20
-        { day: 20, reference: "约书亚记 1:9", content: "我岂没有吩咐你么？你当刚强壮胆！不要惧怕，也不要惊惶；因为你无论往哪里去，耶和华你的上帝必与你同在。" },
-        // Day 21
-        { day: 21, reference: "哥林多前书 10:13", content: "你们所遇见的试探，无非是人所能受的。上帝是信实的，必不叫你们受试探过于所能受的；在受试探的时候，总要给你们开一条出路，叫你们能忍受得住。" },
-        // Day 22
-        { day: 22, reference: "以弗所书 2:8-9", content: "你们得救是本乎恩，也因着信；这并不是出于自己，乃是上帝所赐的；也不是出于行为，免得有人自夸。" },
-        // Day 23
-        { day: 23, reference: "弥迦书 6:8", content: "世人哪，耶和华已指示你何为善。祂向你所要的是什么呢？只要你行公义，好怜悯，存谦卑的心，与你的上帝同行。" },
-        // Day 24
-        { day: 24, reference: "马可福音 12:30-31", content: "你要尽心、尽性、尽意、尽力爱主你的上帝。其次就是说：要爱人如己。再没有比这两条诫命更大的了。" },
-        // Day 25
-        { day: 25, reference: "希伯来书 4:16", content: "所以，我们只管坦然无惧地来到施恩的宝座前，为要得怜恤，蒙恩惠，作随时的帮助。" },
-        // Day 26
-        { day: 26, reference: "启示录 21:4", content: "上帝要擦去他们一切的眼泪；不再有死亡，也不再有悲哀、哭号、疼痛，因为以前的事都过去了。" },
-        // Day 27
-        { day: 27, reference: "诗篇 119:105", content: "祢的话是我脚前的灯，是我路上的光。" },
-        // Day 28
-        { day: 28, reference: "约翰福音 14:6", content: "耶稣说：我就是道路、真理、生命；若不藉着我，没有人能到父那里去。" },
-        // Day 29
-        { day: 29, reference: "使徒行传 4:12", content: "除祂以外，别无拯救；因为在天下人间，没有赐下别的名，我们可以靠着得救。" },
-        // Day 30
-        { day: 30, reference: "耶利米书 29:11", content: "耶和华说：我知道我向你们所怀的意念是赐平安的意念，不是降灾祸的意念，要叫你们末后有指望。" },
-        // Day 31
-        { day: 31, reference: "诗篇 46:1", content: "上帝是我们的避难所，是我们的力量，是我们在患难中随时的帮助。" }
-    ];
-
-    function calculateVerseIndex() {
+    function getTodaysDateString() {
         const today = new Date();
-        const todayUTC = new Date(Date.UTC(today.getFullYear(), today.getMonth(), today.getDate()));
-        
-        // 计算自纪元日以来的天数差
-        const diffTime = Math.abs(todayUTC - EPOCH_DATE);
-        const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
-        
-        // 模 31 运算
-        return diffDays % VERSES.length;
+        const year = today.getFullYear();
+        const month = today.getMonth() + 1;
+        const day = today.getDate();
+        const week = ["日", "一", "二", "三", "四", "五", "六"][today.getDay()];
+        return `${year}年${month}月${day}日 星期${week}`;
     }
 
     function displayVerse() {
-        const verseIndex = calculateVerseIndex();
-        const verseData = VERSES[verseIndex];
-        
-        const verseContentEl = document.getElementById('verse-content');
-        const verseReferenceEl = document.getElementById('verse-reference');
-        const dateDisplayEl = document.getElementById('date-display');
-        
-        // 动态显示日期
-        const today = new Date();
-        const options = { year: 'numeric', month: 'long', day: 'numeric', weekday: 'long' };
-        dateDisplayEl.textContent = today.toLocaleDateString('zh-CN', options);
+        const dayIndex = getDayIndex();
+        const verse = csvData[dayIndex - 1]; // 数组索引从 0 开始
 
-        // 显示经文内容
-        verseContentEl.innerHTML = `<p>${verseData.content}</p>`;
-        verseReferenceEl.textContent = `— ${verseData.reference}`;
+        if (!verse) {
+            document.getElementById('verse-content').innerText = "未能找到今天的经文。";
+            return;
+        }
+
+        document.getElementById('verse-title').innerText = verse.title;
+        document.getElementById('date-display').innerText = getTodaysDateString();
+        document.getElementById('verse-content').innerText = verse.text;
+        document.getElementById('verse-ref').innerText = verse.ref;
+
+        // 填充 Modal 内容
+        document.getElementById('think-content').innerText = verse.think;
+        document.getElementById('prayer-content').innerText = verse.Prayer;
+
+        // 设置经文出处点击事件
+        const verseRefElement = document.getElementById('verse-ref');
+        verseRefElement.onclick = function() {
+            // 在经文出处弹出框中显示完整的经文出处 (这里简化为显示标题+出处)
+            document.getElementById('full-ref-text').innerText = `${verse.title}\n\n出处：${verse.ref}\n\n经文内容：${verse.text}`;
+            document.getElementById('referenceModal').style.display = "flex"; // 使用 flex 显示以保持居中
+        };
     }
-
-    // Modal logic setup
+    
     function setupModalListeners() {
-        const thinkButton = document.getElementById("think-button");
-        const prayerButton = document.getElementById("prayer-button");
-        const consultationButton = document.getElementById("consultation-button");
+        const understandModal = document.getElementById('understandModal'); // 更改 ID
+        const prayerModal = document.getElementById('prayerModal');
+        const consultationModal = document.getElementById('consultationModal');
+        const referenceModal = document.getElementById('referenceModal');
+
+        const understandButton = document.getElementById('understandButton'); // 更改 ID
+        const prayerButton = document.getElementById('prayerButton');
+        const consultationButton = document.getElementById('consultationButton');
+
+        const closeUnderstand = document.getElementById('closeUnderstand'); // 更改 ID
+        const closePrayer = document.getElementById('closePrayer');
+        const closeConsultation = document.getElementById('closeConsultation');
+        const closeReference = document.getElementById('closeReference');
         
-        const thinkModal = document.getElementById("thinkModal");
-        const prayerModal = document.getElementById("prayerModal");
-        const consultationModal = document.getElementById("consultationModal");
-        
-        const closeThink = document.getElementById("closeThink");
-        const closePrayer = document.getElementById("closePrayer");
-        const closeConsultation = document.getElementById("closeConsultation");
-        
-        // THINK 功能（显示沉思指引弹出框）
-        if (thinkButton) {
-            thinkButton.onclick = function() {
-                thinkModal.style.display = "block";
+        // 理解功能（显示理解内容弹出框）
+        if (understandButton) {
+            understandButton.onclick = function() {
+                understandModal.style.display = "flex"; 
             }
         }
         
         // 祷告功能（显示祷告指引弹出框）
         if (prayerButton) {
             prayerButton.onclick = function() {
-                prayerModal.style.display = "block";
+                prayerModal.style.display = "flex"; 
             }
         }
         
-        // 咨询功能（显示联系方式弹出框）
+        // 交流功能（显示交流弹出框）
         if (consultationButton) {
             consultationButton.onclick = function() {
-                consultationModal.style.display = "block";
+                consultationModal.style.display = "flex"; 
             }
         }
 
-        // 关闭 THINK 弹出框
-        if (closeThink) {
-            closeThink.onclick = function() {
-                thinkModal.style.display = "none";
+        // 关闭 UNDERSTAND 弹出框
+        if (closeUnderstand) {
+            closeUnderstand.onclick = function() {
+                understandModal.style.display = "none";
             }
         }
 
@@ -420,11 +425,18 @@
                 consultationModal.style.display = "none";
             }
         }
+        
+        // 关闭 REFERENCE 弹出框
+        if (closeReference) {
+            closeReference.onclick = function() {
+                referenceModal.style.display = "none";
+            }
+        }
 
         // 点击窗口外部关闭所有弹出框
         window.onclick = function(event) {
-            if (event.target == thinkModal) {
-                thinkModal.style.display = "none";
+            if (event.target == understandModal) {
+                understandModal.style.display = "none";
             }
             if (event.target == prayerModal) {
                 prayerModal.style.display = "none";
@@ -432,9 +444,18 @@
             if (event.target == consultationModal) {
                 consultationModal.style.display = "none";
             }
+            if (event.target == referenceModal) {
+                referenceModal.style.display = "none";
+            }
         }
+        
+        // 阻止按钮的默认行为，防止与窗口点击事件冲突
+        document.querySelectorAll('.action-button').forEach(button => {
+            button.addEventListener('click', (e) => e.stopPropagation());
+        });
+        
     }
-
+    
     // 主函数调用
     window.onload = function() {
         displayVerse();
@@ -442,6 +463,5 @@
     };
 
 </script>
-
 </body>
 </html>
