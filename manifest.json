@@ -1,0 +1,21 @@
+{
+"name": "每日圣经 - Verse Gemini",
+"short_name": "每日圣经",
+"start_url": "/verse-gemini/index.html",
+"display": "standalone",
+"background_color": "#f0f4f8",
+"theme_color": "#4CAF50",
+"description": "每天一节圣经经文，支持离线访问和NFC快速打开。",
+"icons": [
+{
+"src": "icon-192.png",
+"sizes": "192x192",
+"type": "image/png"
+},
+{
+"src": "icon-512.png",
+"sizes": "512x512",
+"type": "image/png"
+}
+]
+}
