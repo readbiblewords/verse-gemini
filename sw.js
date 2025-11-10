@@ -2,26 +2,27 @@
 // 缓存策略: Cache-First (缓存优先)
 
 // 1. 定义缓存名称和版本
-// 每次更新网站内容（例如更新 VERSES 数组）时，请务必更改版本号 (v1 -> v2)
-const CACHE_NAME = 'verse-gemini-cache-v1';
+// 每次更新网站内容时，请更改版本号 (v1 -> v2, v3, etc.)
+const CACHE_NAME = 'verse-gemini-pwa-cache-v2';
 
-// 2. 列出需要离线缓存的所有核心文件
-// 由于您的内容都嵌入在 index.html 中，我们只需要缓存这几个文件
+// 2. 列出需要离线缓存的所有核心文件 (App Shell)
 const urlsToCache = [
-  '/', // 网站根目录（对应 index.html）
+  '/', // 根路径（对应 index.html）
   '/index.html',
-  // 如果您有独立的 style.css 文件，也请添加进来，但根据您提供的代码，CSS 已内嵌
+  '/manifest.json', // PWA 清单文件
+  '/icon-192.png',  // PWA 图标文件
+  // 由于您的所有 JS 和 CSS 都已内嵌，无需缓存其他文件
 ];
 
 // 3. 监听 install 事件（Service Worker 首次安装）
 self.addEventListener('install', event => {
-  // 强制立即激活新的 Service Worker，跳过等待，以确保用户下次访问就能使用
+  // 强制立即激活新的 Service Worker，跳过等待
   self.skipWaiting();
   
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then(cache => {
-        console.log('[Service Worker] Caching App Shell: HTML and essential files.');
+        console.log('[Service Worker] Caching PWA assets...');
         // 将所有关键文件添加到缓存
         return cache.addAll(urlsToCache);
       })
@@ -39,7 +40,7 @@ self.addEventListener('activate', event => {
     caches.keys().then(cacheNames => {
       return Promise.all(
         cacheNames.map(cacheName => {
-          // 删除旧版本的缓存，确保用户始终使用最新版本
+          // 删除旧版本的缓存
           if (cacheWhitelist.indexOf(cacheName) === -1) {
             console.log('[Service Worker] Deleting old cache:', cacheName);
             return caches.delete(cacheName);
@@ -48,7 +49,7 @@ self.addEventListener('activate', event => {
       );
     })
   );
-  // 激活后立即获取控制权，确保页面可以被 Service Worker 控制
+  // 立即获取控制权
   return self.clients.claim();
 });
 
@@ -60,30 +61,27 @@ self.addEventListener('fetch', event => {
   }
   
   event.respondWith(
-    // 尝试从缓存中匹配请求
+    // 尝试从缓存中匹配请求 (Cache-First 策略)
     caches.match(event.request)
       .then(response => {
-        // 策略: Cache-First (如果缓存中找到了，直接返回缓存中的内容)
         if (response) {
           console.log('[Service Worker] Serving from cache:', event.request.url);
           return response;
         }
         
         // 缓存中没有，再尝试进行网络请求
-        console.log('[Service Worker] Serving from network:', event.request.url);
         return fetch(event.request)
           .then(networkResponse => {
-             // 只有当网络请求成功时，才将新获取的内容放入缓存
+             // 检查响应有效性
              if (!networkResponse || networkResponse.status !== 200 || networkResponse.type !== 'basic') {
                  return networkResponse;
              }
              
-             // 克隆响应，因为响应流只能被消费一次
+             // 克隆响应并放入缓存
              const responseToCache = networkResponse.clone();
              
              caches.open(CACHE_NAME)
                 .then(cache => {
-                    // 对于新获取的文件（例如 /index.html），更新缓存
                     cache.put(event.request, responseToCache);
                 });
                 
@@ -91,8 +89,7 @@ self.addEventListener('fetch', event => {
           })
           .catch(error => {
             console.error('[Service Worker] Fetch failed and no cache available:', error);
-            // 最终的保障，如果缓存和网络都失败了，可以在这里返回一个离线错误页面
-            // 但因为您的 index.html 已经缓存，这个错误很少发生
+            // 这里可以添加一个离线页面的 Fallback，但由于 index.html 缓存，一般不需要
           });
       })
   );
